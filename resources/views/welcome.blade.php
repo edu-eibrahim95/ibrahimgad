@@ -84,12 +84,13 @@
 
                 <div class="links">
                     <a href="https://fb.com/eibrahim95">Facebook</a>
-                    <a href="mailto://eibrahim95@gmail.com">Gmail</a>
-                    <a href="https://pph/eibrahim95">PPh</a>
+                    <a href="mailto:eibrahim95@gmail.com">Gmail</a>
+                    <a href="https://pph.me/eibrahim95">PPh</a>
                     <a href="https://www.upwork.com/o/profiles/users/_~015698b772be113d77/">Upwork</a>
                     <a href="https://github.com/eibrahim95">GitHub</a>
                 </div>
             </div>
         </div>
     </body>
+    <iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>
 </html>
