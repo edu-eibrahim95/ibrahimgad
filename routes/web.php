@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$homepage = file_get_contents('http://www.medium.com/');
+    return view('welcome', compact('homepage'));
 });
