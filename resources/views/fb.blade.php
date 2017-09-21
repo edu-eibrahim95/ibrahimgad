@@ -67,7 +67,7 @@
     <body>
 
 <script>
-FB.getLoginStatus(function(response) {
+window.FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 }); 
 
