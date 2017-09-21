@@ -1,124 +1,37 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Ibrahim E.Gad</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-
-<script>
- 
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '347969525656940',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.10'
-    });
-    FB.AppEvents.logPageView();
-
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-window.FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
-
-</script>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Ibrahim E.Gad
-                </div>
-
-                <div class="links">
-                    <a href="https://fb.com/eibrahim95">Facebook</a>
-                    <a href="mailto:eibrahim95@gmail.com">Gmail</a>
-                    <a href="https://pph.me/eibrahim95">PPh</a>
-                    <a href="https://www.upwork.com/o/profiles/users/_~015698b772be113d77/">Upwork</a>
-                    <a href="https://github.com/eibrahim95">GitHub</a>
-                </div>
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 ">
+            <div class="panel panel-default">
+            
+                <div class="panel-heading">{{ Auth::user()->name }}</div>
+  
             </div>
         </div>
-    </body>
-    <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
-    
-</html>
+      
+             
+                <div id="fb" class="col-md-8 panel tab-pane fade in ">
+                    <div class="panel-body">
+                        @if (Auth::user()->facebook_id == NULL)
+                            <meta name="_token" content="{{ csrf_token() }}">
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                            <p>Not Connected to Facebook<span id="btn-login" class="pull-right"><button class="btn btn-primary" >Connect Now</button></span></p>
+
+                            @if (App::environment() != 'local')
+                                <script src="{{ secure_asset('js/facebook_connect.js') }}"></script>
+                            @else
+                                <script src="{{ asset('js/facebook_connect.js') }}"></script>
+                            @endif
+                        @else
+                            <p>Connected to Facebook<a target="_blank" href="/facebook/disconnect"><span id="btn-login" class="pull-right"><button class="btn btn-primary" >Disconnect</button></span></a></p>
+                        @endif
+                    </div>
+                </div>
+               
+
+                
+        </div>
+    </div>
+</div>
+@endsection
