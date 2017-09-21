@@ -113,5 +113,5 @@
         </div>
     </body>
     <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
-    {!! $homepage !!}
+    
 </html>
