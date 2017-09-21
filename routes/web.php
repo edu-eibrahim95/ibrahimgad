@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
+	$homepage = "";
+    return view('welcome', compact('homepage'));
+});
+Route::get('/fb', function() {
+	return view('fb');
+});
+Route::get('/medium', function() {
 	$homepage = file_get_contents('http://www.medium.com/');
     return view('welcome', compact('homepage'));
 });
