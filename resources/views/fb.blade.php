@@ -26,7 +26,7 @@
                         @else
                             <p>Connected to Facebook<a target="_blank" href="/facebook/disconnect"><span id="btn-login" class="pull-right"><button class="btn btn-primary" >Disconnect</button></span></a></p>
                             @foreach($graphNode as $edge)
-                                <p>{{ $edge->message }}</p>
+                                <p>{{ $edge }}</p>
                             @endforeach
                         @endif
                     </div>
