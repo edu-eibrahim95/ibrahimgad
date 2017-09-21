@@ -45,7 +45,7 @@ class SocialAuthController extends Controller
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         $response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
         $graphNode = $response->getGraphEdge();
-        return $graphNode.count($graphNode);
+        return $graphNode[0]->getField('message');
     }   
 
     public function callback(Facebook $fb)
