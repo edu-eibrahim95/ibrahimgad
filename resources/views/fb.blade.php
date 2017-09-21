@@ -67,6 +67,10 @@
     <body>
 
 <script>
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+}); 
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '347969525656940',
@@ -75,9 +79,7 @@
       version    : 'v2.10'
     });
     FB.AppEvents.logPageView();
-    FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});   
+
   };
 
   (function(d, s, id){
