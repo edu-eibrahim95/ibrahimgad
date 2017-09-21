@@ -84,6 +84,10 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+  
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
 </script>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
