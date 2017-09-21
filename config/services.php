@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'facebook' => [
+        'client_id' => '347969525656940',
+        'client_secret' => '30437c727e97fb7680bd0e6cc5091dd9',
+        'redirect' => 'http://www.ibrahimgad.com:8000/fb/callback',
+    ],
 
 ];

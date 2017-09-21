@@ -22,3 +22,9 @@ Route::get('/medium', function() {
 	$homepage = file_get_contents('http://www.medium.com/');
     return view('welcome', compact('homepage'));
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('fb/redirect', 'SocialAuthController@redirect');
+Route::get('fb/callback', 'SocialAuthController@callback');
