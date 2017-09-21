@@ -3,10 +3,10 @@ $(document).ready(function() {
     $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
         // initialize facebook sdk
         FB.init({
-            appId: '298609907221614', // replace this with your id
+            appId: '347969525656940', // replace this with your id
             status: true,
             cookie: true,
-            version: 'v2.8'
+            version: 'v2.10'
         });
 
         // attach login click event handler
