@@ -74,7 +74,10 @@
       xfbml      : true,
       version    : 'v2.10'
     });
-    FB.AppEvents.logPageView();   
+    FB.AppEvents.logPageView();
+    FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});   
   };
 
   (function(d, s, id){
@@ -84,10 +87,8 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-  
-FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-});
+
+
 </script>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
