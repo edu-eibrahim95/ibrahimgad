@@ -17,7 +17,19 @@ class SocialAuthController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-    	return view('fb');
+        $user = Auth::user();
+        $graphNode = Array();
+        if ($user->facebook_id == NULL){
+            $fb = new Facebook([
+                'app_id' => config('facebook.config')['app_id'],
+                'app_secret' => config('facebook.config')['app_secret'],
+                'default_graph_version' => config('facebook.config')['default_graph_version'],
+            ]);
+            $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
+            $response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $access_token);
+            $graphNode = $response->getGraphEdge();
+        }
+    	return view('fb', compact('graphNode'));
     }
     public function redirect()
     {
