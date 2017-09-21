@@ -13,7 +13,9 @@ class SocialAuthController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('facebook')->redirect();   
+        return Socialite::driver('facebook')->scopes([
+            'email', 'user_managed_groups'
+        ])->redirect();   
     }   
 
     public function callback()
