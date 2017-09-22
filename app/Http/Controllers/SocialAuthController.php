@@ -48,7 +48,8 @@ class SocialAuthController extends Controller
                     $post_all .= $post_message . '
                     ' . $post_pic .'
                     ';
-                    $post_all .= "\t\t----------------------------------------------------------------";
+                    $post_all .= '----------------------------------------------------------------
+                    ';
 
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=100000', $access_token);
                     $comments = $comments_response->getGraphEdge();
