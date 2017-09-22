@@ -88,7 +88,7 @@ class SocialAuthController extends Controller
                     }
                     $post_all .= '================================================================
 ';
-                    file_put_contents(storage_path("group"), $post_all);
+                    file_put_contents(storage_path(date('m', strtotime($post_time)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
                     return $post_all;
                 }
                 $prev = $next;
