@@ -43,8 +43,11 @@ class SocialAuthController extends Controller
                     $post_pic = $graphPost->getField('picture');
                     $post_id = $graphPost->getField('id');
 
-                    $post_all .= "POST BY : " . $post_owner . '|' . $post_time . "\n";
-                    $post_all .= $post_message . "\n" . $post_pic ."\n";
+                    $post_all .= "POST BY : " . $post_owner . '|' . $post_time . '
+                    ';
+                    $post_all .= $post_message . '
+                    ' . $post_pic .'
+                    ';
                     $post_all .= "\t\t----------------------------------------------------------------";
 
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=100000', $access_token);
@@ -56,8 +59,10 @@ class SocialAuthController extends Controller
                         $comment_message = $comment->getField('message');
 
 
-                        $post_all .= "COMMENT BY : " . $comment_owner . '|' . $comment_time . "\n";
-                        $post_all .= $comment_message . "\n";
+                        $post_all .= "COMMENT BY : " . $comment_owner . '|' . $comment_time . '
+                        ';
+                        $post_all .= $comment_message . '
+                        ';
                         $post_all .= "\t\t----------------------------------------------------------------";
 
                         $comment_replies = $comment->getField('comments');
@@ -69,8 +74,10 @@ class SocialAuthController extends Controller
                             $reply_time = $reply->getField('created_time')->format('y-m-d');
                             $reply_message = $reply->getField('message');
 
-                            $post_all .= "REPLY BY : " . $reply_owner . '|' . $reply_time . "\n";
-                            $post_all .= $reply_message . "\n";
+                            $post_all .= "REPLY BY : " . $reply_owner . '|' . $reply_time . '
+                            ';
+                            $post_all .= $reply_message . '
+                            ';
                             $post_all .= "\t\t----------------------------------------------------------------";
                              
                          }
