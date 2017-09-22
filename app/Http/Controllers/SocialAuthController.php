@@ -43,6 +43,7 @@ class SocialAuthController extends Controller
                     $post_pic = $graphPost->getField('picture');
                     $post_id = $graphPost->getField('id');
 
+
                     $post_all .= "POST BY : " . trim($post_owner) . '|' . trim($post_time) . '
 ';
                     $post_all .= trim($post_message) . '
@@ -89,7 +90,7 @@ class SocialAuthController extends Controller
                     $post_all .= '================================================================
 ';
                     file_put_contents(storage_path(date('m', strtotime($post_time)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
-                    return $post_all;
+                    //return $post_all;
                 }
                 $prev = $next;
             }
