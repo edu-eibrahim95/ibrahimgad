@@ -31,8 +31,8 @@ class SocialAuthController extends Controller
             for ($next = date('y-m-d', strtotime($prev. '+1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. '+1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=10000', $access_token);
                 $graphEdge = $response->getGraphEdge();
-                $post_all = "";
                 foreach ($graphEdge as $edge){
+                    $post_all = "";
                     $id = $edge->getField('id');
                     $post_response = $fb->get('/'.$id.'?fields=id,message, picture,from,created_time', $access_token);
                     $graphPost = $post_response->getGraphNode();
