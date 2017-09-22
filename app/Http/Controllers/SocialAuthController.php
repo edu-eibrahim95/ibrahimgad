@@ -61,6 +61,8 @@ class SocialAuthController extends Controller
                         $post_all .= "\t\t----------------------------------------------------------------";
 
                         $comment_replies = $comment->getField('comments');
+                        
+                        if ($comment_replies != ""){
                         // replies details
                         foreach ($comment_replies as  $reply) {
                             $reply_owner = $reply->getField('from')->getField('name');
@@ -71,6 +73,7 @@ class SocialAuthController extends Controller
                             $post_all .= $reply_message . "\n";
                             $post_all .= "\t\t----------------------------------------------------------------";
                              
+                         }
                          } 
                     }
                     $post_all .= "\t\t================================================================";
