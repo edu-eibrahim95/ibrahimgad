@@ -63,7 +63,8 @@ class SocialAuthController extends Controller
                         ';
                         $post_all .= $comment_message . '
                         ';
-                        $post_all .= "\t\t----------------------------------------------------------------";
+                        $post_all .= '----------------------------------------------------------------
+                        ';
 
                         $comment_replies = $comment->getField('comments');
                         
@@ -78,12 +79,14 @@ class SocialAuthController extends Controller
                             ';
                             $post_all .= $reply_message . '
                             ';
-                            $post_all .= "\t\t----------------------------------------------------------------";
+                            $post_all .= '----------------------------------------------------------------
+                            ';
                              
                          }
                          } 
                     }
-                    $post_all .= "\t\t================================================================";
+                    $post_all .= '================================================================
+                    ';
                     file_put_contents(storage_path("group"), $post_all);
                     return $post_all;
                 }
