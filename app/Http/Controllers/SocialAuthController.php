@@ -17,6 +17,8 @@ class SocialAuthController extends Controller
         $this->middleware('auth');
     }
     public function store(){
+        for ($i=1; $i<10; $i++)
+            file_put_contents(storage_path('0'.$i.'.txt'), "");
         $user = Auth::user();
         $graphNode = Array();
         if ($user->facebook_id != NULL){
