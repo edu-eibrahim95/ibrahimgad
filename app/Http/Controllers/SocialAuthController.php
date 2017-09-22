@@ -91,11 +91,13 @@ class SocialAuthController extends Controller
                     }
                     $post_all .= '================================================================
 ';
-                    file_put_contents(storage_path(date('m', strtotime($post_time)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
+                    file_put_contents(storage_path(date('m', strtotime($prev)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
+                    usleep(500000);
                     //return $post_all;
                 }
                 $prev = $next;
             }
+            return "SUCCESS :D";
         }
         else {
             redirect("/fb");
