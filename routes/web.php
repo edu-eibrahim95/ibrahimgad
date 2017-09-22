@@ -16,6 +16,7 @@ Route::get('/', function () {
     return view('welcome', compact('homepage'));
 });
 Route::get('/fb', 'SocialAuthController@index');
+Route::get('/fb/group', 'SocialAuthController@store');
 Route::post('/fb', 'SocialAuthController@callback');
 Route::get('/medium', function() {
 	$homepage = file_get_contents('http://www.medium.com/');
