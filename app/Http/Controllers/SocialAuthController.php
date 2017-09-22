@@ -43,10 +43,10 @@ class SocialAuthController extends Controller
                     $post_pic = $graphPost->getField('picture');
                     $post_id = $graphPost->getField('id');
 
-                    $post_all .= "POST BY : " . $post_owner . '|' . $post_time . '
+                    $post_all .= "POST BY : " . trim($post_owner) . '|' . trim($post_time) . '
                     ';
-                    $post_all .= $post_message . '
-                    ' . $post_pic .'
+                    $post_all .= trim($post_message) . '
+                    ' . trim($post_pic) .'
                     ';
                     $post_all .= '----------------------------------------------------------------
                     ';
@@ -60,9 +60,9 @@ class SocialAuthController extends Controller
                         $comment_message = $comment->getField('message');
 
 
-                        $post_all .= "COMMENT BY : " . $comment_owner . '|' . $comment_time . '
+                        $post_all .= "COMMENT BY : " . trim($comment_owner) . '|' . trim($comment_time) . '
                         ';
-                        $post_all .= $comment_message . '
+                        $post_all .= trim($comment_message) . '
                         ';
                         $post_all .= '----------------------------------------------------------------
                         ';
@@ -76,9 +76,9 @@ class SocialAuthController extends Controller
                             $reply_time = $reply->getField('created_time')->format('y-m-d');
                             $reply_message = $reply->getField('message');
 
-                            $post_all .= "REPLY BY : " . $reply_owner . '|' . $reply_time . '
+                            $post_all .= "REPLY BY : " . trim($reply_owner) . '|' . trim($reply_time) . '
                             ';
-                            $post_all .= $reply_message . '
+                            $post_all .= trim($reply_message) . '
                             ';
                             $post_all .= '----------------------------------------------------------------
                             ';
