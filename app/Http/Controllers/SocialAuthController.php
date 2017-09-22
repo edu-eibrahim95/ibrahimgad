@@ -124,25 +124,29 @@ class SocialAuthController extends Controller
         $response = $fb->get('/382982675402366_384175135283120/comments?fields=comments,message,from,created_time', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
         $graphNode = $response->getGraphEdge();
-        //$phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-//         $section = $phpWord->addSection();
+        $section = $phpWord->addSection();
 
-//         $description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-// tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-// quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-// consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-// cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-// proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        $description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-//         $section->addImage("http://itsolutionstuff.com/frontTheme/images/logo.png");
-//         $section->addText($description);
+        $section->addImage("http://itsolutionstuff.com/frontTheme/images/logo.png");
+        $section->addText($description);
 
-//         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-//         try {
-//             $objWriter->save(storage_path('helloWorld.docx'));
-//         } catch (Exception $e) {
-//         }
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        try {
+            $objWriter->save(storage_path('hello.docx'));
+            $one = \PhpOffice\PhpWord\IOFactory::load(storage_path('hello.docx'));
+            $one->getSections()[0]->addText('a7a');
+            $one->save(storage_path('hello_again.docx'));
+            return $one->getSections();
+        } catch (Exception $e) {
+        }
         return $graphNode;
     }   
 
