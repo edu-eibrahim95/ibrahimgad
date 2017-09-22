@@ -38,7 +38,7 @@ class SocialAuthController extends Controller
                     $graphPost = $post_response->getGraphNode();
                     // post details
                     $post_owner = $graphPost->getField('from')->getField('name');
-                    $post_time = $graphPost->getField('created_time')->getField('date');
+                    $post_time = $graphPost->getField('created_time');
                     $post_message = $graphPost->getField('message');
                     $post_pic = $graphPost->getField('picture');
                     $post_id = $graphPost->getField('id');
@@ -52,7 +52,7 @@ class SocialAuthController extends Controller
                     foreach ($comments as $comment) {
                         // comments details
                         $comment_owner = $comment->getField('from')->getField('name');
-                        $comment_time = $comment->getField('created_time')->getField('date');
+                        $comment_time = $comment->getField('created_time');
                         $comment_message = $comment->getField('message');
 
 
@@ -64,7 +64,7 @@ class SocialAuthController extends Controller
                         // replies details
                         foreach ($comment_replies as  $reply) {
                             $reply_owner = $reply->getField('from')->getField('name');
-                            $reply_time = $reply->getField('created_time')->getField('date');
+                            $reply_time = $reply->getField('created_time');
                             $reply_message = $reply->getField('message');
 
                             $post_all .= "REPLY BY : " . $reply_owner . '|' . $reply_time . "\n";
