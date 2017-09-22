@@ -84,7 +84,7 @@ class SocialAuthController extends Controller
                          } 
                     }
                     $post_all .= "\t\t================================================================";
-                    file_put_contents(storage_path("group"), $post_all)
+                    file_put_contents(storage_path("group"), $post_all);
                     return $post_all;
                 }
                 $prev = $next;
