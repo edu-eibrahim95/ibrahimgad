@@ -20,7 +20,6 @@ class SocialAuthController extends Controller
         $user = Auth::user();
         $graphNode = Array();
         if ($user->facebook_id != NULL){
-            return "hi";
             $fb = new Facebook([
                 'app_id' => config('facebook.config')['app_id'],
                 'app_secret' => config('facebook.config')['app_secret'],
@@ -29,7 +28,7 @@ class SocialAuthController extends Controller
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
             $start = "17-01-01";
             $prev = $start;
-
+            return "hi";
             for ($next = date('y-m-d', strtotime($prev. '+1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. '+1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=10000', $access_token);
                 $graphEdge = $response->getGraphEdge();
