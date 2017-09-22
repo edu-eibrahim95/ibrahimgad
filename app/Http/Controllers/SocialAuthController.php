@@ -44,12 +44,12 @@ class SocialAuthController extends Controller
                     $post_id = $graphPost->getField('id');
 
                     $post_all .= "POST BY : " . trim($post_owner) . '|' . trim($post_time) . '
-                    ';
+';
                     $post_all .= trim($post_message) . '
-                    ' . trim($post_pic) .'
-                    ';
+' . trim($post_pic) .'
+';
                     $post_all .= '----------------------------------------------------------------
-                    ';
+';
 
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=100000', $access_token);
                     $comments = $comments_response->getGraphEdge();
@@ -61,11 +61,11 @@ class SocialAuthController extends Controller
 
 
                         $post_all .= "COMMENT BY : " . trim($comment_owner) . '|' . trim($comment_time) . '
-                        ';
+';
                         $post_all .= trim($comment_message) . '
-                        ';
+';
                         $post_all .= '----------------------------------------------------------------
-                        ';
+';
 
                         $comment_replies = $comment->getField('comments');
                         
@@ -77,17 +77,17 @@ class SocialAuthController extends Controller
                             $reply_message = $reply->getField('message');
 
                             $post_all .= "REPLY BY : " . trim($reply_owner) . '|' . trim($reply_time) . '
-                            ';
+';
                             $post_all .= trim($reply_message) . '
-                            ';
+';
                             $post_all .= '----------------------------------------------------------------
-                            ';
+';
                              
                          }
                          } 
                     }
                     $post_all .= '================================================================
-                    ';
+';
                     file_put_contents(storage_path("group"), $post_all);
                     return $post_all;
                 }
