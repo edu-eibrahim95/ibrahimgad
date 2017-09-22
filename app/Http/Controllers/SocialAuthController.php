@@ -30,7 +30,7 @@ class SocialAuthController extends Controller
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
             $start = "17-08-31";
             $prev = $start;
-            for ($next = date('y-m-d', strtotime($prev. '+1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. '+1 day'))){
+            for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=10000', $access_token);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
@@ -54,7 +54,7 @@ class SocialAuthController extends Controller
                     $post_all .= '----------------------------------------------------------------
 ';
 
-                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=100000', $access_token);
+                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=1000', $access_token);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
