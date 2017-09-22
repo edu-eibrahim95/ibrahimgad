@@ -31,7 +31,7 @@ class SocialAuthController extends Controller
             $start = "17-08-31";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. ' +1 day'))){
-                $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=2000', $access_token);
+                $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=1000', $access_token);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
                     $post_all = "";
@@ -54,7 +54,7 @@ class SocialAuthController extends Controller
                     $post_all .= '----------------------------------------------------------------
 ';
 
-                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=2000', $access_token);
+                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=1000', $access_token);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
@@ -92,7 +92,7 @@ class SocialAuthController extends Controller
                     $post_all .= '================================================================
 ';
                     file_put_contents(storage_path(date('m', strtotime($next)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
-                    usleep(500000);
+                    //usleep(500000);
                     //return $post_all;
                 }
                 $prev = $next;
