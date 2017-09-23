@@ -87,8 +87,11 @@
 @section('footer')
 <script>
     function openlink(link){
+        alert(link);
         link = (link.indexOf('medium.com') != -1) ? link : "https://www.medium.com"+link;
+        link = (link.indexOf('https://') != -1) ? link : "https://"+link;
         link = "http://ibrahimgad.com/medium?url="+link;
+        alert("what");
         window.location.href=link;
     }
         var ass = document.getElementsByTagName('a');
