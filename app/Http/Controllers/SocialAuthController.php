@@ -44,7 +44,7 @@ class SocialAuthController extends Controller
                     $post_message = $graphPost->getField('message');
                     $post_pic = $graphPost->getField('full_picture');
                     $post_id = $graphPost->getField('id');
-                    $pic_del = ($post_pic == "") ? "" : "##"
+                    $pic_del = ($post_pic == "") ? "" : "##";
 
                     $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
 ';
