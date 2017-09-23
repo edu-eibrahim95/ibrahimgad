@@ -18,10 +18,8 @@ Route::get('/', function () {
 Route::get('/fb', 'SocialAuthController@index');
 Route::get('/fb/group', 'SocialAuthController@store');
 Route::post('/fb', 'SocialAuthController@callback');
-Route::get('/medium', function() {
-	$homepage = file_get_contents('http://www.medium.com/');
-    return view('welcome', compact('homepage'));
-});
+Route::get('/medium', 'ViewBlockedController@medium');
+Route::get('/medium/{url}', 'ViewBlockedController@forUrl');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

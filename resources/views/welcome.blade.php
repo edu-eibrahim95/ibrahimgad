@@ -64,7 +64,7 @@
                 <div class="links">
                     <a target="_blank" href="https://fb.com/eibrahim95">Facebook</a>
                     <a target="_blank" href="mailto:eibrahim95@gmail.com">Gmail</a>
-                    <a target="_blank" href="https://pph.me/eibrahim95">PPh</a>
+                    <a target="_blank" href="http://pph.me/eibrahim95">PPh</a>
                     <a target="_blank" href="https://www.upwork.com/o/profiles/users/_~015698b772be113d77/">Upwork</a>
                     <a target="_blank" href="https://github.com/eibrahim95">GitHub</a>
                 </div>
