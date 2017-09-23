@@ -8,7 +8,7 @@ class ViewBlockedController extends Controller
 {
     public function medium(){
     	$url = $start = Input::get('url');
-    	$url = ($url == "" ) ? 'http://www.medium.com/' ? $url;
+    	$url = ($url == "" ) ? 'http://www.medium.com/' : $url;
 		$homepage = file_get_contents($url);
     	return view('blocked', compact('homepage'));
     }
