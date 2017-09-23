@@ -65,7 +65,13 @@ class SocialAuthController extends Controller
                         
                         $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
                         $comment_pic_node = $comments_pic_response->getGraphNode();
-                        $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        try {
+                        
+                            $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        } catch (Exception $e) {
+                            $comment_pic = ""; 
+                        }
+                        
                         $comment_pic_del = ($comment_pic == "") ? "" : "##";
 
                         $post_all .= "COMMENT BY : " . trim($comment_owner) . ' | ' . trim($comment_time) . '
@@ -88,7 +94,11 @@ class SocialAuthController extends Controller
 
                             $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
                             $reply_pic_node = $reply_pic_response->getGraphNode();
-                            $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            try {
+                                $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            } catch (Exception $e) {
+                                $reply_pic = "";
+                            }
                             $reply_pic_del = ($reply_pic == "") ? "" : "##";
 
                             $post_all .= "REPLY BY : " . trim($reply_owner) . ' | ' . trim($reply_time) . '
