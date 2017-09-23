@@ -66,7 +66,11 @@ class SocialAuthController extends Controller
                         $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
                         $comment_pic_node = $comments_pic_response->getGraphNode();
                         if ($comment_pic_node->getField('attachment') != ""){
+                            if ($comment_pic_node->getField('attachment')->getField('media') != ""){
                         $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        }else{
+                            $comment_pic =  "";
+                        }
                         }else{
                             $comment_pic =  "";
                         }
@@ -93,7 +97,11 @@ class SocialAuthController extends Controller
                             $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
                             $reply_pic_node = $reply_pic_response->getGraphNode();
                             if ($reply_pic_node->getField('attachment') != ""){
+                                if ($reply_pic_node->getField('attachment')->getField('media') != ""){
                             $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            }else{
+                                $reply_pic = "";
+                            }
                             }else{
                                 $reply_pic = "";
                             }
