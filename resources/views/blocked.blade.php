@@ -52,7 +52,7 @@
                 margin-bottom: 30px;
             }
         </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!--         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
                     $('a').click(function(){
@@ -62,7 +62,7 @@
                         window.location.href=href;
                     });
                 });
-        </script>
+        </script> -->
 @endsection
 @section('content')
     <div class="flex-center position-ref full-height">
