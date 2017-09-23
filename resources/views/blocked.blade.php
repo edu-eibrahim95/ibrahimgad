@@ -91,8 +91,9 @@
         link = (link.indexOf('medium.com') != -1) ? link : "https://www.medium.com"+link;
         link = (link.indexOf('https://') != -1) ? link : "https://"+link;
         link = "http://ibrahimgad.com/medium?url="+link;
-        alert("what");
+        alert(link);
         window.location.href=link;
+        return false;
     }
         var ass = document.getElementsByTagName('a');
         for (i=0; i<ass.length; i++){
