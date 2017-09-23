@@ -53,7 +53,7 @@
             }
         </style>
         <script>
-            $document.ready(function(){
+            $(document).ready(function(){
                     $('a').click(function(){
                         var href = this.href;
                         href = (href.contains('medium.com')) ? href : "https://www.medium.com"+href;
