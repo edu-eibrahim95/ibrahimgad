@@ -58,8 +58,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Ibrahim E.Gad
-                    <small>Software Developer / Web Developer / System Administrator</small>
+                    <p style="margin:0">Ibrahim E.Gad</p>
+                    <p style="font-size:30%">Software Developer / Web Developer / System Administrator</p>
                 </div>
                 <div class="links">
                     <a href="https://fb.com/eibrahim95">Facebook</a>
