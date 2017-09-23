@@ -54,7 +54,7 @@ class SocialAuthController extends Controller
                     $post_all .= '----------------------------------------------------------------
 ';
 
-                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=comments,message,from,created_time&limit=1000', $access_token);
+                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
@@ -144,9 +144,9 @@ class SocialAuthController extends Controller
         ]);
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         //$response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
-        $response = $fb->get('/382982675402366_383186352048665/comments?fields=comments,message,from,created_time', $accessToken);
+        $response = $fb->get('/504770779890221?fields=attachment,message,from,created_time', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
-        $graphNode = $response->getGraphEdge();
+        $graphNode = $response->getGraphNode();
 //         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 //         $section = $phpWord->addSection();
