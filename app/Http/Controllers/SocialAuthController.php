@@ -30,7 +30,7 @@ class SocialAuthController extends Controller
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
             $start = "17-01-01";
             $prev = $start;
-            for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. ' +1 day'))){
+            for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=1000', $access_token);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
@@ -58,14 +58,20 @@ class SocialAuthController extends Controller
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
+                        $comment_id = $comments->getField('id');
                         $comment_owner = $comment->getField('from')->getField('name');
                         $comment_time = $comment->getField('created_time')->format('y-m-d');
                         $comment_message = $comment->getField('message');
-
+                        
+                        $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
+                        $comment_pic_node = $comments_pic_response->getGraphNode();
+                        $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        $comment_pic_del = ($comment_pic == "") ? "" : "##";
 
                         $post_all .= "COMMENT BY : " . trim($comment_owner) . ' | ' . trim($comment_time) . '
 ';
                         $post_all .= trim($comment_message) . '
+' . $comment_pic_del . trim($comment_pic) .$comment_pic_del.'
 ';
                         $post_all .= '----------------------------------------------------------------
 ';
@@ -75,13 +81,20 @@ class SocialAuthController extends Controller
                         if ($comment_replies != ""){
                         // replies details
                         foreach ($comment_replies as  $reply) {
+                            $reply_id = $reply->getField('id');
                             $reply_owner = $reply->getField('from')->getField('name');
                             $reply_time = $reply->getField('created_time')->format('y-m-d');
                             $reply_message = $reply->getField('message');
 
+                            $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
+                            $reply_pic_node = $reply_pic_response->getGraphNode();
+                            $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            $reply_pic_del = ($reply_pic == "") ? "" : "##";
+
                             $post_all .= "REPLY BY : " . trim($reply_owner) . ' | ' . trim($reply_time) . '
 ';
                             $post_all .= trim($reply_message) . '
+' . $reply_pic_del . trim($reply_pic) .$reply_pic_del.'
 ';
                             $post_all .= '----------------------------------------------------------------
 ';
@@ -131,7 +144,7 @@ class SocialAuthController extends Controller
         ]);
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         //$response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
-        $response = $fb->get('/382982675402366_484371428596823/comments?fields=picture,comments,message,from,created_time', $accessToken);
+        $response = $fb->get('/382982675402366_383186352048665/comments?fields=comments,message,from,created_time', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
         $graphNode = $response->getGraphEdge();
 //         $phpWord = new \PhpOffice\PhpWord\PhpWord();
