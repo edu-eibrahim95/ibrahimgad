@@ -97,7 +97,7 @@
     }
         var ass = document.getElementsByTagName('a');
         for (i=0; i<ass.length; i++){
-            ass[i].setAttribute('onclick', 'openlink(this.getAttribute("href");return false;');
+            ass[i].setAttribute('onclick', 'openlink(this.getAttribute("href"));return false;');
         }
 </script>
 @endsection
