@@ -52,6 +52,16 @@
                 margin-bottom: 30px;
             }
         </style>
+        <script>
+            $document.ready(function(){
+                    $('a').click(function(){
+                        var href = this.href;
+                        href = (href.contains('medium.com')) ? href : "https://www.medium.com"+href;
+                        href = href.replace('/','|');
+                        window.location.href=href;
+                    });
+                });
+        </script>
 @endsection
 @section('content')
     <div class="flex-center position-ref full-height">
@@ -71,4 +81,5 @@
             </div>
         </div>
     <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
+    {!! $homepage !!}
 @endsection

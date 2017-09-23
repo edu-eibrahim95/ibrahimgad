@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-	$homepage = "";
-    return view('welcome', compact('homepage'));
+    return view('welcome');
 });
 Route::get('/fb', 'SocialAuthController@index');
 Route::get('/fb/group', 'SocialAuthController@store');

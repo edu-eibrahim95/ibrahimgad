@@ -12,6 +12,6 @@ class ViewBlockedController extends Controller
     }
     public function forUrl($url){
     	$homepage = file_get_contents(str_replace('|', '/', $url));
-    	return view('welcome', compact('homepage'));
+    	return view('blocked', compact('homepage'));
     }
 }
