@@ -87,11 +87,11 @@
 @section('footer')
 <script>
     function openlink(link){
-        alert(link);
+        //alert(link);
         link = (link.indexOf('/') == 0) ? link : "https://www.medium.com"+link;
         link = (link.indexOf('https://') != -1 || link.indexOf('http://') != -1 || link.indexOf('mailto:') != -1) ? link : "https://"+link;
         link = "http://ibrahimgad.com/medium?url="+link;
-        alert(link);
+        //alert(link);
         window.location.href=link;
         return false;
     }
