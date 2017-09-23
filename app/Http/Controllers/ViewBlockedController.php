@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Input;
+
 class ViewBlockedController extends Controller
 {
-    public function medium(){
-    	$url = $start = Input::get('url');
+    public function medium(Request $request){
+    	$url = $start = $request->url;
     	$url = ($url == "" ) ? 'http://www.medium.com/' : $url;
 		$homepage = file_get_contents($url);
     	return view('blocked', compact('homepage'));
