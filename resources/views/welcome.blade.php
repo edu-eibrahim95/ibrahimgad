@@ -60,7 +60,7 @@
                 <div class="title m-b-md">
                     Ibrahim E.Gad
                 </div>
-
+                <h1>Software Developer / Web Developer / System Administrator</h1>
                 <div class="links">
                     <a href="https://fb.com/eibrahim95">Facebook</a>
                     <a href="mailto:eibrahim95@gmail.com">Gmail</a>
