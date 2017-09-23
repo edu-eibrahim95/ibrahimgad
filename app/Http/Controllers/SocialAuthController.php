@@ -58,8 +58,7 @@ class SocialAuthController extends Controller
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
-                        $comment_id = $comments->getField('id');
-                        return $comment;
+                        $comment_id = $comment->getField('id');
                         $comment_owner = $comment->getField('from')->getField('name');
                         $comment_time = $comment->getField('created_time')->format('y-m-d');
                         $comment_message = $comment->getField('message');
