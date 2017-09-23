@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Input;
 class ViewBlockedController extends Controller
 {
     public function medium(){
