@@ -84,3 +84,11 @@
     <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
     {!! $homepage !!}
 @endsection
+@section('footer')
+<script>
+        var ass = document.getElementsByTagName('a');
+        for (i=0; i<ass.length; i++){
+            ass[i].setAttribute('onclick', 'alert("hi");');
+        }
+</script>
+@endsection
