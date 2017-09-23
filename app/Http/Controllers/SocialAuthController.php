@@ -59,6 +59,7 @@ class SocialAuthController extends Controller
                     foreach ($comments as $comment) {
                         // comments details
                         $comment_id = $comments->getField('id');
+                        return $comment_id;
                         $comment_owner = $comment->getField('from')->getField('name');
                         $comment_time = $comment->getField('created_time')->format('y-m-d');
                         $comment_message = $comment->getField('message');
