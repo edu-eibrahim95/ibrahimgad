@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
                 'default_graph_version' => config('facebook.config')['default_graph_version'],
             ]);
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
-            $start = "17-01-01";
+            $start = "17-08-31";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=1000', $access_token);
@@ -160,7 +160,7 @@ class SocialAuthController extends Controller
         ]);
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         //$response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
-        $response = $fb->get('/504770779890221?fields=attachment,message,from,created_time', $accessToken);
+        $response = $fb->get('/382982675402366_383186352048665?fields=full_picture,comments,message,from,created_time', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
         $graphNode = $response->getGraphNode();
 //         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -186,7 +186,7 @@ class SocialAuthController extends Controller
 //             return $one->getSections();
 //         } catch (Exception $e) {
 //         }
-        return $graphNode;
+        return $graphNode->getField('full_picture');
     }   
 
     public function callback(Facebook $fb)
