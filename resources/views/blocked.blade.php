@@ -86,9 +86,14 @@
 @endsection
 @section('footer')
 <script>
+    function openlink(link){
+        link = (link.contains('medium.com')) ? link : "https://www.medium.com"+link;
+        link = link.replace('/','|');
+        window.location.href=link;
+    }
         var ass = document.getElementsByTagName('a');
         for (i=0; i<ass.length; i++){
-            ass[i].setAttribute('onclick', 'alert("hi");');
+            ass[i].setAttribute('onclick', 'openlink(this.href);');
         }
 </script>
 @endsection
