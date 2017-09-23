@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
                 'default_graph_version' => config('facebook.config')['default_graph_version'],
             ]);
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
-            $start = "17-08-31";
+            $start = "17-01-01";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d');$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=1000', $access_token);
@@ -36,20 +36,20 @@ class SocialAuthController extends Controller
                 foreach ($graphEdge as $edge){
                     $post_all = "";
                     $id = $edge->getField('id');
-                    $post_response = $fb->get('/'.$id.'?fields=id,message, picture,from,created_time', $access_token);
+                    $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
                     $graphPost = $post_response->getGraphNode();
                     // post details
                     $post_owner = $graphPost->getField('from')->getField('name');
                     $post_time = $graphPost->getField('created_time')->format('y-m-d');
                     $post_message = $graphPost->getField('message');
-                    $post_pic = $graphPost->getField('picture');
+                    $post_pic = $graphPost->getField('full_picture');
                     $post_id = $graphPost->getField('id');
+                    $pic_del = ($post_pic == "") ? "" : "##"
 
-
-                    $post_all .= "POST BY : " . trim($post_owner) . '|' . trim($post_time) . '|' . trim($id) .'
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
 ';
                     $post_all .= trim($post_message) . '
-' . trim($post_pic) .'
+' . $pic_del . trim($post_pic) .$pic_del.'
 ';
                     $post_all .= '----------------------------------------------------------------
 ';
@@ -63,7 +63,7 @@ class SocialAuthController extends Controller
                         $comment_message = $comment->getField('message');
 
 
-                        $post_all .= "COMMENT BY : " . trim($comment_owner) . '|' . trim($comment_time) . '
+                        $post_all .= "COMMENT BY : " . trim($comment_owner) . ' | ' . trim($comment_time) . '
 ';
                         $post_all .= trim($comment_message) . '
 ';
@@ -79,7 +79,7 @@ class SocialAuthController extends Controller
                             $reply_time = $reply->getField('created_time')->format('y-m-d');
                             $reply_message = $reply->getField('message');
 
-                            $post_all .= "REPLY BY : " . trim($reply_owner) . '|' . trim($reply_time) . '
+                            $post_all .= "REPLY BY : " . trim($reply_owner) . ' | ' . trim($reply_time) . '
 ';
                             $post_all .= trim($reply_message) . '
 ';
@@ -131,32 +131,32 @@ class SocialAuthController extends Controller
         ]);
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         //$response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
-        $response = $fb->get('/382982675402366_384175135283120/comments?fields=comments,message,from,created_time', $accessToken);
+        $response = $fb->get('/382982675402366_484371428596823/comments?fields=picture,comments,message,from,created_time', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
         $graphNode = $response->getGraphEdge();
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+//         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-        $section = $phpWord->addSection();
+//         $section = $phpWord->addSection();
 
-        $description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+//         $description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+// tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+// quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+// consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+// cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+// proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-        $section->addImage("http://itsolutionstuff.com/frontTheme/images/logo.png");
-        $section->addText($description);
+//         $section->addImage("http://itsolutionstuff.com/frontTheme/images/logo.png");
+//         $section->addText($description);
 
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        try {
-            $objWriter->save(storage_path('hello.docx'));
-            $one = \PhpOffice\PhpWord\IOFactory::load(storage_path('hello.docx'));
-            $one->getSections()[0]->addText('a7a');
-            $one->save(storage_path('hello_again.docx'));
-            return $one->getSections();
-        } catch (Exception $e) {
-        }
+//         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+//         try {
+//             $objWriter->save(storage_path('hello.docx'));
+//             $one = \PhpOffice\PhpWord\IOFactory::load(storage_path('hello.docx'));
+//             $one->getSections()[0]->addText('a7a');
+//             $one->save(storage_path('hello_again.docx'));
+//             return $one->getSections();
+//         } catch (Exception $e) {
+//         }
         return $graphNode;
     }   
 
