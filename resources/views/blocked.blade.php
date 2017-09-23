@@ -65,7 +65,7 @@
         </script> -->
 @endsection
 @section('content')
-    <div class="flex-center position-ref full-height">
+<!--     <div class="flex-center position-ref full-height">
 
             <div class="content">
                 <div class="title m-b-md">
@@ -80,18 +80,18 @@
                     <a target="_blank" href="https://github.com/eibrahim95">GitHub</a>
                 </div>
             </div>
-        </div>
+        </div> -->
     <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
     {!! $homepage !!}
 @endsection
 @section('footer')
 <script>
     function openlink(link){
-        alert(link);
+        //alert(link);
         link = (link.indexOf('/') != 0) ? link : "https://www.medium.com"+link;
         link = (link.indexOf('https://') != -1 || link.indexOf('http://') != -1 || link.indexOf('mailto:') != -1) ? link : "https://"+link;
         link = "http://ibrahimgad.com/medium?url="+link;
-        alert(link);
+        //alert(link);
         window.location.href=link;
         return false;
     }
