@@ -166,7 +166,7 @@ class SocialAuthController extends Controller
 
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
                     $post_likes = $post_likes_response->getGraphEdge();
-                    $post_likes = $post_likes->getField('total_count');
+                    $post_likes = count($post_likes)
 
                     $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) . ' | ' .$post_likes . '
 ';
@@ -266,7 +266,7 @@ class SocialAuthController extends Controller
 
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
                     $post_likes = $post_likes_response->getGraphEdge();
-                    $post_likes = $post_likes->getField('total_count');
+                    $post_likes = count($post_likes)
 
                     $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .' | ' . $post_likes . '
 ';
@@ -383,9 +383,9 @@ class SocialAuthController extends Controller
         ]);
         //$response = $fb->post('/347969525656940/accounts/test-users', array ('installed' => 'true', 'permissions'=>'user_managed_groups', 'name'=>'ibrahim'),$accessToken);
         //$response = $fb->get('/382982675402366/feed?since=2017-01-01 00:00:00&until=2017-01-26&limit=100', $accessToken);
-        $response = $fb->get('/382982675402366_383186352048665?fields=full_picture,comments,message,from,created_time', $accessToken);
+        $response = $fb->get('/382982675402366_383186352048665/likes', $accessToken);
         //$response = $fb->get('/1833747763317212/comments?fields=message,from,updated_time', $accessToken);
-        $graphNode = $response->getGraphNode();
+        $graphNode = $response->getGraphEdge();
 //         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 //         $section = $phpWord->addSection();
@@ -409,7 +409,7 @@ class SocialAuthController extends Controller
 //             return $one->getSections();
 //         } catch (Exception $e) {
 //         }
-        return $graphNode->getField('full_picture');
+        return count($graphNode);
     }   
 
     public function callback(Facebook $fb)
