@@ -46,7 +46,12 @@ class SocialAuthController extends Controller
                     $post_id = $graphPost->getField('id');
                     $pic_del = ($post_pic == "") ? "" : "##";
 
-                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
+                    $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
+                    usleep(5000);
+                    $post_likes = $post_likes_response->getGraphEdge();
+                    $post_likes = count($post_likes);
+
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) . ' | ' . $post_likes .'
 ';
                     $post_all .= trim($post_message) . '
 ' . $pic_del . trim($post_pic) .$pic_del.'
@@ -144,7 +149,7 @@ class SocialAuthController extends Controller
                 'default_graph_version' => config('facebook.config')['default_graph_version'],
             ]);
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
-            $start = "17-07-30";
+            $start = "17-08-31";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 
