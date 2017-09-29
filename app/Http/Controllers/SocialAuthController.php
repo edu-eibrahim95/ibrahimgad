@@ -132,6 +132,217 @@ class SocialAuthController extends Controller
             redirect("/fb");
         }
     }
+    public function top(){
+        for ($i=1; $i<10; $i++)
+            file_put_contents(storage_path('0'.$i.'.txt'), "");
+        $user = Auth::user();
+        $graphNode = Array();
+        if ($user->facebook_id != NULL){
+            $fb = new Facebook([
+                'app_id' => config('facebook.config')['app_id'],
+                'app_secret' => config('facebook.config')['app_secret'],
+                'default_graph_version' => config('facebook.config')['default_graph_version'],
+            ]);
+            $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
+            $start = "17-07-30";
+            $prev = $start;
+            for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
+                
+
+                $response = $fb->get('/382982675402366/feed?since='.$prev.' 00:00:00&until='.$next.' 12:00:00&limit=1000', $access_token);
+                $graphEdge = $response->getGraphEdge();
+                foreach ($graphEdge as $edge){
+                    $post_all = "";
+                    $id = $edge->getField('id');
+                    $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
+                    $graphPost = $post_response->getGraphNode();
+                    // post details
+                    $post_owner = $graphPost->getField('from')->getField('name');
+                    $post_time = $graphPost->getField('created_time')->format('y-m-d');
+                    $post_message = $graphPost->getField('message');
+                    $post_pic = $graphPost->getField('full_picture');
+                    $post_id = $graphPost->getField('id');
+                    $pic_del = ($post_pic == "") ? "" : "##";
+
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
+';
+                    $post_all .= trim($post_message) . '
+' . $pic_del . trim($post_pic) .$pic_del.'
+';
+                    $post_all .= '----------------------------------------------------------------
+';
+
+                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
+                    $comments = $comments_response->getGraphEdge();
+                    foreach ($comments as $comment) {
+                        // comments details
+                        $comment_id = $comment->getField('id');
+                        $comment_owner = $comment->getField('from')->getField('name');
+                        $comment_time = $comment->getField('created_time')->format('y-m-d');
+                        $comment_message = $comment->getField('message');
+                        
+                        $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
+                        $comment_pic_node = $comments_pic_response->getGraphNode();
+                        if ($comment_pic_node->getField('attachment') != ""){
+                            if ($comment_pic_node->getField('attachment')->getField('media') != ""){
+                        $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        }else{
+                            $comment_pic =  "";
+                        }
+                        }else{
+                            $comment_pic =  "";
+                        }
+                        $comment_pic_del = ($comment_pic == "") ? "" : "##";
+
+                        $post_all .= "COMMENT BY : " . trim($comment_owner) . ' | ' . trim($comment_time) . '
+';
+                        $post_all .= trim($comment_message) . '
+' . $comment_pic_del . trim($comment_pic) .$comment_pic_del.'
+';
+                        $post_all .= '----------------------------------------------------------------
+';
+
+                        $comment_replies = $comment->getField('comments');
+                        
+                        if ($comment_replies != ""){
+                        // replies details
+                        foreach ($comment_replies as  $reply) {
+                            $reply_id = $reply->getField('id');
+                            $reply_owner = $reply->getField('from')->getField('name');
+                            $reply_time = $reply->getField('created_time')->format('y-m-d');
+                            $reply_message = $reply->getField('message');
+
+                            $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
+                            $reply_pic_node = $reply_pic_response->getGraphNode();
+                            if ($reply_pic_node->getField('attachment') != ""){
+                                if ($reply_pic_node->getField('attachment')->getField('media') != ""){
+                            $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            }else{
+                                $reply_pic = "";
+                            }
+                            }else{
+                                $reply_pic = "";
+                            }
+                            $reply_pic_del = ($reply_pic == "") ? "" : "##";
+
+                            $post_all .= "REPLY BY : " . trim($reply_owner) . ' | ' . trim($reply_time) . '
+';
+                            $post_all .= trim($reply_message) . '
+' . $reply_pic_del . trim($reply_pic) .$reply_pic_del.'
+';
+                            $post_all .= '----------------------------------------------------------------
+';
+                             
+                         }
+                         } 
+                    }
+                    $post_all .= '================================================================
+';
+                    file_put_contents(storage_path(date('m', strtotime($next)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
+                    //usleep(500000);
+                    //return $post_all;
+                }
+                $response = $fb->get('/382982675402366/feed?since='.$prev.' 12:00:00&until='.$next.' 23:59:59&limit=1000', $access_token);
+                $graphEdge = $response->getGraphEdge();
+                foreach ($graphEdge as $edge){
+                    $post_all = "";
+                    $id = $edge->getField('id');
+                    $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
+                    $graphPost = $post_response->getGraphNode();
+                    // post details
+                    $post_owner = $graphPost->getField('from')->getField('name');
+                    $post_time = $graphPost->getField('created_time')->format('y-m-d');
+                    $post_message = $graphPost->getField('message');
+                    $post_pic = $graphPost->getField('full_picture');
+                    $post_id = $graphPost->getField('id');
+                    $pic_del = ($post_pic == "") ? "" : "##";
+
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
+';
+                    $post_all .= trim($post_message) . '
+' . $pic_del . trim($post_pic) .$pic_del.'
+';
+                    $post_all .= '----------------------------------------------------------------
+';
+
+                    $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
+                    $comments = $comments_response->getGraphEdge();
+                    foreach ($comments as $comment) {
+                        // comments details
+                        $comment_id = $comment->getField('id');
+                        $comment_owner = $comment->getField('from')->getField('name');
+                        $comment_time = $comment->getField('created_time')->format('y-m-d');
+                        $comment_message = $comment->getField('message');
+                        
+                        $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
+                        $comment_pic_node = $comments_pic_response->getGraphNode();
+                        if ($comment_pic_node->getField('attachment') != ""){
+                            if ($comment_pic_node->getField('attachment')->getField('media') != ""){
+                        $comment_pic = $comment_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                        }else{
+                            $comment_pic =  "";
+                        }
+                        }else{
+                            $comment_pic =  "";
+                        }
+                        $comment_pic_del = ($comment_pic == "") ? "" : "##";
+
+                        $post_all .= "COMMENT BY : " . trim($comment_owner) . ' | ' . trim($comment_time) . '
+';
+                        $post_all .= trim($comment_message) . '
+' . $comment_pic_del . trim($comment_pic) .$comment_pic_del.'
+';
+                        $post_all .= '----------------------------------------------------------------
+';
+
+                        $comment_replies = $comment->getField('comments');
+                        
+                        if ($comment_replies != ""){
+                        // replies details
+                        foreach ($comment_replies as  $reply) {
+                            $reply_id = $reply->getField('id');
+                            $reply_owner = $reply->getField('from')->getField('name');
+                            $reply_time = $reply->getField('created_time')->format('y-m-d');
+                            $reply_message = $reply->getField('message');
+
+                            $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
+                            $reply_pic_node = $reply_pic_response->getGraphNode();
+                            if ($reply_pic_node->getField('attachment') != ""){
+                                if ($reply_pic_node->getField('attachment')->getField('media') != ""){
+                            $reply_pic = $reply_pic_node->getField('attachment')->getField('media')->getField('image')->getField('src');
+                            }else{
+                                $reply_pic = "";
+                            }
+                            }else{
+                                $reply_pic = "";
+                            }
+                            $reply_pic_del = ($reply_pic == "") ? "" : "##";
+
+                            $post_all .= "REPLY BY : " . trim($reply_owner) . ' | ' . trim($reply_time) . '
+';
+                            $post_all .= trim($reply_message) . '
+' . $reply_pic_del . trim($reply_pic) .$reply_pic_del.'
+';
+                            $post_all .= '----------------------------------------------------------------
+';
+                             
+                         }
+                         } 
+                    }
+                    $post_all .= '================================================================
+';
+                    file_put_contents(storage_path(date('m', strtotime($next)).'.txt'), $post_all, FILE_APPEND | LOCK_EX);
+                    //usleep(500000);
+                    //return $post_all;
+                }
+                $prev = $next;
+            }
+            return "SUCCESS :D";
+        }
+        else {
+            redirect("/fb");
+        }
+    }
     public function index(){
         $user = Auth::user();
         $graphNode = Array();
@@ -147,6 +358,7 @@ class SocialAuthController extends Controller
         }
     	return view('fb', compact('graphNode'));
     }
+
     public function redirect()
     {
     	$accessToken = 'EAAE8eff4LWwBAM41R8EzUy9GHRgDoIBaucOBVtOWYIpbUC9xDjjqkNM1qCxQTGbZCHN1AK3fQ7WorZBwPtkphyX3YjD7WaSYK2F2DjOHCSAc0pqyUsF4jsZABYJwkjgZCWPYc3S8IcxTr4eW5GFDSab3y3n6XKgiAAAdfzrfhw0KL5EtNXHh';
