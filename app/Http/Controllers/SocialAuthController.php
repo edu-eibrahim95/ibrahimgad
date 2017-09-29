@@ -164,7 +164,11 @@ class SocialAuthController extends Controller
                     $post_id = $graphPost->getField('id');
                     $pic_del = ($post_pic == "") ? "" : "##";
 
-                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
+                    $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
+                    $post_likes = $post_likes_response->getGraphEdge();
+                    $post_likes = $post_likes->getField('total_count');
+
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) . ' | ' .$post_likes . '
 ';
                     $post_all .= trim($post_message) . '
 ' . $pic_del . trim($post_pic) .$pic_del.'
@@ -242,6 +246,9 @@ class SocialAuthController extends Controller
                     //usleep(500000);
                     //return $post_all;
                 }
+
+                usleep(500);
+
                 $response = $fb->get('/382982675402366/feed?since='.$prev.' 12:00:00&until='.$next.' 23:59:59&limit=1000', $access_token);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
@@ -257,14 +264,18 @@ class SocialAuthController extends Controller
                     $post_id = $graphPost->getField('id');
                     $pic_del = ($post_pic == "") ? "" : "##";
 
-                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .'
+                    $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
+                    $post_likes = $post_likes_response->getGraphEdge();
+                    $post_likes = $post_likes->getField('total_count');
+
+                    $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) .' | ' . $post_likes . '
 ';
                     $post_all .= trim($post_message) . '
 ' . $pic_del . trim($post_pic) .$pic_del.'
 ';
                     $post_all .= '----------------------------------------------------------------
 ';
-
+                    
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
