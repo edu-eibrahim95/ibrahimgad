@@ -169,7 +169,7 @@ class SocialAuthController extends Controller
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
                     usleep(500);
                     $post_likes = $post_likes_response->getGraphEdge();
-                    $post_likes = count($post_likes)
+                    $post_likes = count($post_likes);
 
                     $post_all .= "POST BY : " . trim($post_owner) . ' | ' . trim($post_time) . ' | ' . trim($id) . ' | ' .$post_likes . '
 ';
