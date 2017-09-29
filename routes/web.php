@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Route::get('/fb', 'SocialAuthController@index');
 Route::get('/fb/group', 'SocialAuthController@store');
+Route::get('/fb/top', 'SocialAuthController@top');
 Route::post('/fb', 'SocialAuthController@callback');
 Route::get('/medium', 'ViewBlockedController@medium');
 //Route::get('/medium/{url}', 'ViewBlockedController@forUrl');
