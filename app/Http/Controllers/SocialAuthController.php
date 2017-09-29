@@ -150,11 +150,13 @@ class SocialAuthController extends Controller
                 
 
                 $response = $fb->get('/382982675402366/feed?since='.$prev.' 00:00:00&until='.$next.' 12:00:00&limit=1000', $access_token);
+                usleep(500);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
                     $post_all = "";
                     $id = $edge->getField('id');
                     $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
+                    usleep(500);
                     $graphPost = $post_response->getGraphNode();
                     // post details
                     $post_owner = $graphPost->getField('from')->getField('name');
@@ -165,6 +167,7 @@ class SocialAuthController extends Controller
                     $pic_del = ($post_pic == "") ? "" : "##";
 
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
+                    usleep(500);
                     $post_likes = $post_likes_response->getGraphEdge();
                     $post_likes = count($post_likes)
 
@@ -177,6 +180,7 @@ class SocialAuthController extends Controller
 ';
 
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
+                    usleep(500);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
@@ -186,6 +190,7 @@ class SocialAuthController extends Controller
                         $comment_message = $comment->getField('message');
                         
                         $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
+                        usleep(500);
                         $comment_pic_node = $comments_pic_response->getGraphNode();
                         if ($comment_pic_node->getField('attachment') != ""){
                             if ($comment_pic_node->getField('attachment')->getField('media') != ""){
@@ -217,6 +222,7 @@ class SocialAuthController extends Controller
                             $reply_message = $reply->getField('message');
 
                             $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
+                            usleep(500);
                             $reply_pic_node = $reply_pic_response->getGraphNode();
                             if ($reply_pic_node->getField('attachment') != ""){
                                 if ($reply_pic_node->getField('attachment')->getField('media') != ""){
@@ -250,11 +256,13 @@ class SocialAuthController extends Controller
                 usleep(500);
 
                 $response = $fb->get('/382982675402366/feed?since='.$prev.' 12:00:00&until='.$next.' 23:59:59&limit=1000', $access_token);
+                usleep(500);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
                     $post_all = "";
                     $id = $edge->getField('id');
                     $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
+                    usleep(500);
                     $graphPost = $post_response->getGraphNode();
                     // post details
                     $post_owner = $graphPost->getField('from')->getField('name');
@@ -265,6 +273,7 @@ class SocialAuthController extends Controller
                     $pic_del = ($post_pic == "") ? "" : "##";
 
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
+                    usleep(500);
                     $post_likes = $post_likes_response->getGraphEdge();
                     $post_likes = count($post_likes)
 
@@ -277,6 +286,7 @@ class SocialAuthController extends Controller
 ';
                     
                     $comments_response = $fb->get('/'.$post_id.'/comments?fields=id,comments,message,from,created_time&limit=1000', $access_token);
+                    usleep(500);
                     $comments = $comments_response->getGraphEdge();
                     foreach ($comments as $comment) {
                         // comments details
@@ -286,6 +296,7 @@ class SocialAuthController extends Controller
                         $comment_message = $comment->getField('message');
                         
                         $comments_pic_response = $fb->get('/'.$comment_id.'?fields=attachment', $access_token);
+                        usleep(500);
                         $comment_pic_node = $comments_pic_response->getGraphNode();
                         if ($comment_pic_node->getField('attachment') != ""){
                             if ($comment_pic_node->getField('attachment')->getField('media') != ""){
@@ -317,6 +328,7 @@ class SocialAuthController extends Controller
                             $reply_message = $reply->getField('message');
 
                             $reply_pic_response = $fb->get('/'.$reply_id.'?fields=attachment', $access_token);
+                            usleep(500);
                             $reply_pic_node = $reply_pic_response->getGraphNode();
                             if ($reply_pic_node->getField('attachment') != ""){
                                 if ($reply_pic_node->getField('attachment')->getField('media') != ""){
