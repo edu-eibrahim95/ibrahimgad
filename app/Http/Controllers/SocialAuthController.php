@@ -31,11 +31,13 @@ class SocialAuthController extends Controller
             $start = "17-08-31";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
+                usleep(5000);
                 $response = $fb->get('/382982675402366/feed?since='.$prev.'&until='.$next.'&limit=1000', $access_token);
                 $graphEdge = $response->getGraphEdge();
                 foreach ($graphEdge as $edge){
                     $post_all = "";
                     $id = $edge->getField('id');
+                    usleep(5000);
                     $post_response = $fb->get('/'.$id.'?fields=id,message, full_picture,from,created_time', $access_token);
                     $graphPost = $post_response->getGraphNode();
                     // post details
@@ -45,7 +47,7 @@ class SocialAuthController extends Controller
                     $post_pic = $graphPost->getField('full_picture');
                     $post_id = $graphPost->getField('id');
                     $pic_del = ($post_pic == "") ? "" : "##";
-
+                    usleep(5000);
                     $post_likes_response = $fb->get('/'.$post_id.'/likes', $access_token);
                     usleep(5000);
                     $post_likes = $post_likes_response->getGraphEdge();
