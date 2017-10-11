@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+@section('head')
+<title>Register to Ibrahim E.Gad's Blog</title>
+<meta property="og:title" content="Register to Ibrahim E.Gad's Blog">
+<meta property="og:description" content="Ibrahim E.Gad's Place On the Internet">
+<meta property="og:image" content="{{ asset('images/link.jpg') }}">
+<meta property="og:type" content="profile">
+<meta property="fb:profile_id" content="eibrahim95">
+@endsection
 @section('content')
 <div class="container">
     <div class="row">

@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('head')
+<title>Ibrahim E.Gad's Blog</title>
+<meta property="og:title" content="Ibrahim E.Gad's Blog">
+<meta property="og:description" content="Ibrahim E.Gad's Place On the Internet, Blog">
+<meta property="og:image" content="{{ asset('images/link.jpg') }}">
+<meta property="og:type" content="article">
+<meta property="fb:profile_id" content="eibrahim95">
+
         <style>
             html, body {
                 background-color: #fff;

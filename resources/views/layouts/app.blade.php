@@ -8,12 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta property="og:url" content="http://www.ibrahimgad.com/{{ Request::path() }}">
-    
+    <style>#content {margin-top:80px;}</style>
     @yield('head')
 </head>
 <body>
@@ -76,8 +74,9 @@
                 </div>
             </div>
         </nav>
-
+        <div id="content">
         @yield('content')
+    </div>
     </div>
 
     <!-- Scripts -->
