@@ -17,8 +17,8 @@ class SocialAuthController extends Controller
         $this->middleware('auth');
     }
     public function store(){
-        for ($i=1; $i<10; $i++)
-            file_put_contents(storage_path('0'.$i.'.txt'), "");
+        // for ($i=1; $i<10; $i++)
+        //     file_put_contents(storage_path('0'.$i.'.txt'), "");
         $user = Auth::user();
         $graphNode = Array();
         if ($user->facebook_id != NULL){
@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
                 'default_graph_version' => config('facebook.config')['default_graph_version'],
             ]);
             $access_token = FacebookUser::where('id', $user->facebook_id)->first()['access_token'];
-            $start = "17-08-31";
+            $start = "17-09-2";
             $prev = $start;
             for ($next = date('y-m-d', strtotime($prev. ' +1 day')); $next != date('y-m-d', strtotime(date('y-m-d'). '+1 day'));$next=date('y-m-d', strtotime($prev. ' +1 day'))){
                 usleep(5000);

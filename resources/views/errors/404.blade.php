@@ -58,10 +58,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <p style="margin:0">Ibrahim E.Gad</p>
-                    <p style="font-size:30%">Software Developer / Web Developer / System Administrator</p>
+                    <p style="margin:0">Sorry Couldn't Find This Page</p>
                 </div>
                 <div class="links">
+                	<a target="_blank" href="/">Home</a>
                     <a target="_blank" href="https://fb.com/eibrahim95">Facebook</a>
                     <a target="_blank" href="mailto:eibrahim95@gmail.com">Gmail</a>
                     <a target="_blank" href="http://pph.me/eibrahim95">PPh</a>
@@ -71,4 +71,4 @@
             </div>
         </div>
     <!--<iframe style="width:99%;height:500px;" src="https://medium.com/"><p>Your browser does not support iframes.</p></iframe>-->
-@endsection
+@endsection	

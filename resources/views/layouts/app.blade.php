@@ -12,11 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     @yield('head')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -37,12 +38,14 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li @if(Request::path() == '/' || Request::path() == 'home' ) class="active" @endif><a href="/">HOME</a></li>
+                        <li @if(strpos(Request::path(), 'blog') !== false) class="active" @endif><a href="{{ route('blog') }}">BLOG</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        @if(strpos(Request::path(), 'blog') !== false)
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
@@ -67,6 +70,7 @@
                                 </ul>
                             </li>
                         @endguest
+                        @endif
                     </ul>
                 </div>
             </div>
