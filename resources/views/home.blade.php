@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('head')
+<meta property="og:title" content="Ibrahim E.Gad">
+<meta property="og:description" content="Ibrahim E.Gad's Place On the Internet">
+<meta property="og:image" content="{{ asset('images/link.jpg') }}">
         <style>
             html, body {
                 background-color: #fff;

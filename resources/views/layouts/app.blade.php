@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta property="og:url" content="http://www.ibrahimgad.com/{{ Request::path() }}">
     
     @yield('head')
 </head>
