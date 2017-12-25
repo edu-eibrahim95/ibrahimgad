@@ -17,15 +17,13 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
-Route::get('/fb', 'SocialAuthController@index');
-Route::get('/fb/group', 'SocialAuthController@store');
-Route::get('/fb/top', 'SocialAuthController@top');
-Route::post('/fb', 'SocialAuthController@callback');
-Route::get('/medium', 'ViewBlockedController@medium');
+Route::get('fb', 'SocialAuthController@index');
+Route::get('fb/group', 'SocialAuthController@store');
+Route::get('fb/top', 'SocialAuthController@top');
+Route::post('fb', 'SocialAuthController@callback');
+Route::get('medium', 'ViewBlockedController@medium');
 Route::get('blog', 'BlogController@index')->name('blog');
-//Route::get('/medium/{url}', 'ViewBlockedController@forUrl');
-//Auth::routes();
-
+Route::get('moments', 'MomentsController@index');
 Route::get('fb/redirect', 'SocialAuthController@redirect');
 //Route::get('fb/callback', 'SocialAuthController@callback');
 
