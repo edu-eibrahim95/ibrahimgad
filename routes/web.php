@@ -29,17 +29,18 @@ Route::get('blog', 'BlogController@index')->name('blog');
 Route::get('fb/redirect', 'SocialAuthController@redirect');
 //Route::get('fb/callback', 'SocialAuthController@callback');
 
+Route::group(['prefix' => 'blog'], function () {
+	Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+	Route::post('login','Auth\LoginController@login');
+	Route::post('logout','Auth\LoginController@logout')->name('logout');
 
-$this->get('/blog/login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('/blog/login','Auth\LoginController@login');
-$this->post('/blog/logout','Auth\LoginController@logout')->name('logout');
+	//RegistrationRoutes...
+	Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+	Route::post('register','Auth\RegisterController@register');
 
-//RegistrationRoutes...
-$this->get('/blog/register','Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('/blog/register','Auth\RegisterController@register');
-
-//PasswordResetRoutes...
-$this->get('/blog/password/reset','Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-$this->post('/blog/password/email','Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-$this->get('/blog/password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('password.reset');
-$this->post('/blog/password/reset','Auth\ResetPasswordController@reset');
+	//PasswordResetRoutes...
+	Route::get('password/reset','Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+	Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+	Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('password.reset');
+	Route::post('password/reset','Auth\ResetPasswordController@reset');
+});
