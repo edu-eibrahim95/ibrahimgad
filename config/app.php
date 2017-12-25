@@ -179,6 +179,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         
         Backpack\Base\BaseServiceProvider::class,
+        Backpack\CRUD\CrudServiceProvider::class,
 
     ],
 
