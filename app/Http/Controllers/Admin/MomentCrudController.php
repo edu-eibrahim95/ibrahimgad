@@ -26,8 +26,7 @@ class MomentCrudController extends CrudController
         $this->crud->addField([
 			'name' => 'video',
 			'label' => 'Video',
-			'type' => 'upload',
-			'upload' => true,
+			'type' => 'video',
 			]);
     }
     public function store(CrudRequest $request)

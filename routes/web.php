@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +22,7 @@ Route::get('fb/top', 'SocialAuthController@top');
 Route::post('fb', 'SocialAuthController@callback');
 Route::get('medium', 'ViewBlockedController@medium');
 Route::get('blog', 'BlogController@index')->name('blog');
-Route::get('moments', 'MomentsController@index');
+Route::get('moments', 'Web\MomentsController@index')->name('moments');
 Route::get('fb/redirect', 'SocialAuthController@redirect');
 //Route::get('fb/callback', 'SocialAuthController@callback');
 
