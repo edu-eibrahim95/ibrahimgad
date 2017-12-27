@@ -32,7 +32,7 @@ Route::group(['prefix' => 'blog'], function () {
 	Route::post('logout','Auth\LoginController@logout')->name('logout');
 
 	//RegistrationRoutes...
-	Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register');
+	Route::get('register',function () {return redirect("/");})->name('register');//'Auth\RegisterController@showRegistrationForm')->name('register');
 	Route::post('register','Auth\RegisterController@register');
 
 	//PasswordResetRoutes...
