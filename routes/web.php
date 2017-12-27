@@ -9,7 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('admin/register',function () {return redirect("/admin");})->name('backpack.auth.register');
 Route::get('/', function () {
     return view('home');
 });

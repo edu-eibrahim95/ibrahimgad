@@ -26,7 +26,8 @@ function () {
         Route::post('logout', 'Auth\LoginController@logout');
 
         // Registration Routes...
-        Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('backpack.auth.register');
+        //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('backpack.auth.register');
+        Route::get('register',function () {return redirect("/admin");})->name('backpack.auth.register');
         Route::post('register', 'Auth\RegisterController@register');
 
         // Password Reset Routes...
