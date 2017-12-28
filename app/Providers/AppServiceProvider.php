@@ -14,9 +14,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        //if(! file_exists(public_path('uploads'))) {
-            symlink(storage_path('uploads'), public_path('uploads'));
-        //}
     }
 
     /**
