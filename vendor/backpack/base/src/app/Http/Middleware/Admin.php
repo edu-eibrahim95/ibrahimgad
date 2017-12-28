@@ -25,7 +25,8 @@ class Admin
                 return redirect()->guest(config('backpack.base.route_prefix', 'admin').'/login');
             }
         }
-
-        return $next($request);
+        if (Auth::user() && Auth::user()->admin == 1)
+            return $next($request);
+        else return redirect()->guest(config('backpack.base.route_prefix', 'admin').'/login');
     }
 }
