@@ -39,7 +39,7 @@
                     <ul class="nav navbar-nav">
                         <li @if(Request::path() == '/' || Request::path() == 'home' ) class="active" @endif><a href="/">HOME</a></li>
                         <li @if(strpos(Request::path(), 'blog') !== false) class="active" @endif><a href="{{ route('blog') }}">BLOG</a></li>
-                        <li @if(strpos(Request::path(), 'moments') !== false) class="active" @endif><a href="{{ route('moments') }}">MOMENTS</a></li>
+                        <li @if(strpos(Request::path(), 'moments') !== false) class="active" @endif><a href="{{ route('moments') }}">SCENES</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
