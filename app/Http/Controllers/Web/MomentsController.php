@@ -8,7 +8,7 @@ use App\Moment;
 class MomentsController extends Controller
 {
     public function index(Request $request){
-    	$moments = Moment::orderBy('id', 'DESC')->paginate(15);
+    	$moments = Moment::orderBy('id', 'DESC')->paginate(16);
     	return view('web.moments_index', compact('moments'));
     }
 }
